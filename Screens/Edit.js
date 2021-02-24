@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
+import { api_connection } from "../constants/api";
+
 function Edit(props) {
   const data = props.route.params.data;
   const [title, setTitle] = useState(data.title);
   const [description, setDescription] = useState(data.description);
 
   const updateData = () => {
-    fetch(`http://192.168.43.173:8000/api/articles/${data.id}/`, {
+    fetch(api_connection.url + `/api/articles/${data.id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

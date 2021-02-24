@@ -1,14 +1,17 @@
 import { useLinkProps } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { TextInput, Button } from "react-native-paper";
+
+import { api_connection } from "../constants/api";
 
 function Create(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const createData = () => {
-    fetch("http://192.168.43.173:8000/api/articles/", {
+    fetch(api_connection.url + "/api/articles/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +32,7 @@ function Create(props) {
       .catch((error) => Alert.alert("Error", error.toString()));
   };
   return (
-    <View>
+    <ScrollView>
       <TextInput
         style={styles.inputStyle}
         label="Title"
@@ -54,7 +57,7 @@ function Create(props) {
       >
         Insert Article
       </Button>
-    </View>
+    </ScrollView>
   );
 }
 
